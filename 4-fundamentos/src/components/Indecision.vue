@@ -26,19 +26,25 @@
         },
         methods: {
             async getAnswer() {
-                this.answer = "pensando...";
-                const {answer, image} = await fetch('https://yesno.wtf/api')
-                .then( r => r.json() )
-                
-                this.answer = answer === "yes" ? "Sí" : "No";
-                this.image = image;
+                try {
+                    this.answer = "pensando...";
+                    const {answer, image} = await fetch('https://yesno.wtf/api')
+                    .then( r => r.json() )
+                    
+                    this.answer = answer === "yes" ? "Sí" : "No";
+                    this.image = image;
+                } catch (error) {
+                    this.answer = 'No se pudo obtener la respuesta';
+                    this.image = null;
+                }
             }
         },
         watch: {
             question(value) {
                 this.isValid = value.endsWith('?');
-               if(!value.includes('?')) return
-               this.getAnswer()
+                console.log(value);
+                if(!value.includes('?')) return
+                this.getAnswer()
             }
         }
     }

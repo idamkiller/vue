@@ -6,6 +6,7 @@
         <span>{{ count }} <sup>2</sup> = {{square}}</span>
         <button @click="increment">+</button>
         </p>
+        <p data-testid="counterP">{{count}}</p>
     </div>
 </template>
 
@@ -19,10 +20,7 @@
             },
             start: {
                 type: Number,
-                default: 0,
-                validator(value){
-                    return value >=100;
-                }
+                default: 10
             }
         },
         data() {
@@ -40,7 +38,6 @@
         },
         computed: {
             square() {
-                console.log('square');
                 return this.count * this.count
             }
         }
